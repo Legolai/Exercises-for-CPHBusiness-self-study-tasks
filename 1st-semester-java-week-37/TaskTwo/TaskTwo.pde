@@ -12,4 +12,4 @@ boolean isHappy = true;
 // Task 2.d
 println("Hi, my name is " + name);
 println("I am " + age + " years old");
-println("I "+ (mood ? "" : "dont ") + "clap my hands");
+println("I "+ (isHappy ? "" : "dont ") + "clap my hands");
