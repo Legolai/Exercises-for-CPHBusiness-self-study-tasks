@@ -39,6 +39,9 @@ public class Datamatik {
 	}
 
 	public static String getStudentNameByIndex(Student[] arr, int index) {
+		if (index >= arr.length) {
+			return "The index is out of bounds";
+		}
 		return arr[index].name;
 	}
 
