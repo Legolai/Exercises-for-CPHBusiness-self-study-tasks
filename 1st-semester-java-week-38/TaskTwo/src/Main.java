@@ -17,7 +17,7 @@ public class Main {
 
         System.out.println(sum(10, 24));
         System.out.println(toUpperString("Hello world"));
-        System.out.println(isCapitalized("Hello world"));
+        System.out.println(isCapitalized("hello world"));
 
     }
 
@@ -35,6 +35,8 @@ public class Main {
     }
 
     public static boolean isCapitalized(String s) {
-        return (Character.isUpperCase(s.charAt(0)));
+        char stort = toUpperString(s).charAt(0);
+        return stort == s.charAt(0);
+        // return (Character.isUpperCase(s.charAt(0)));
     }
 }
