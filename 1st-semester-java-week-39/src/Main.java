@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
@@ -108,9 +109,9 @@ public class Main {
         return letters;
     }
 
-    private static HashMap<Character, Integer> sortMap(HashMap<Character, Integer> letters, boolean mostCommonFirst) {
+    private static HashMap<Character, Integer> sortMap(HashMap<Character, Integer> map, boolean mostCommonFirst) {
 
-        ArrayList<Entry<Character, Integer>> list = new ArrayList<>(letters.entrySet());
+        ArrayList<Entry<Character, Integer>> list = new ArrayList<>(map.entrySet());
         if (mostCommonFirst) {
             list.sort(Entry.<Character, Integer>comparingByValue().reversed());
         } else {
@@ -133,6 +134,10 @@ public class Main {
 
     private static void printMostFrequentLetter() {
         HashMap<Character, Integer> letters = getFrequentLetter();
+
+        var num = Collections.max(letters.entrySet(), Entry.<Character, Integer>comparingByValue());
+        System.out.println("Most frequent letter: " + num.getKey() + " = " + num.getValue());
+
         HashMap<Character, Integer> result = sortMap(letters, true);
         System.out.println("Top 10 : Most frequent letters");
         result.forEach((key, value) -> System.out.println(key + " : " + value));
@@ -140,6 +145,10 @@ public class Main {
 
     private static void printLessFrequentLetter() {
         HashMap<Character, Integer> letters = getFrequentLetter();
+
+        var num = Collections.min(letters.entrySet(), Entry.<Character, Integer>comparingByValue());
+        System.out.println("Less frequent letter: " + num.getKey() + " = " + num.getValue());
+
         HashMap<Character, Integer> result = sortMap(letters, false);
         System.out.println("Top 10 : Less frequent letters");
         result.forEach((key, value) -> System.out.println(key + " : " + value));
