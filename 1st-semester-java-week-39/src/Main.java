@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -89,8 +88,8 @@ public class Main {
         }
     }
 
-    private static Map<Character, Integer> getFrequentLetter() {
-        Map<Character, Integer> letters = new HashMap<>();
+    private static HashMap<Character, Integer> getFrequentLetter() {
+        HashMap<Character, Integer> letters = new HashMap<>();
 
         for (String s : text) {
             for (char c : s.toLowerCase().toCharArray()) {
@@ -107,14 +106,14 @@ public class Main {
         return letters;
     }
 
-    private static Map<Character, Integer> sortMap(Map<Character, Integer> letters, boolean mostCommonFirst) {
+    private static HashMap<Character, Integer> sortMap(HashMap<Character, Integer> letters, boolean mostCommonFirst) {
 
-        Map<Character, Integer> result = new LinkedHashMap<>();
+        HashMap<Character, Integer> result = new LinkedHashMap<>();
         if (mostCommonFirst) {
-            letters.entrySet().stream().sorted(Map.Entry.<Character, Integer>comparingByValue().reversed()).limit(10)
-                    .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
+            letters.entrySet().stream().sorted(HashMap.Entry.<Character, Integer>comparingByValue().reversed())
+                    .limit(10).forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
         } else {
-            letters.entrySet().stream().sorted(Map.Entry.<Character, Integer>comparingByValue()).limit(10)
+            letters.entrySet().stream().sorted(HashMap.Entry.<Character, Integer>comparingByValue()).limit(10)
                     .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
         }
 
@@ -122,15 +121,15 @@ public class Main {
     }
 
     private static void printMostFrequentLetter() {
-        Map<Character, Integer> letters = getFrequentLetter();
-        Map<Character, Integer> result = sortMap(letters, true);
+        HashMap<Character, Integer> letters = getFrequentLetter();
+        HashMap<Character, Integer> result = sortMap(letters, true);
         System.out.println("Top 10 : Most frequent letters");
         result.forEach((key, value) -> System.out.println(key + " : " + value));
     }
 
     private static void printLessFrequentLetter() {
-        Map<Character, Integer> letters = getFrequentLetter();
-        Map<Character, Integer> result = sortMap(letters, false);
+        HashMap<Character, Integer> letters = getFrequentLetter();
+        HashMap<Character, Integer> result = sortMap(letters, false);
         System.out.println("Top 10 : Less frequent letters");
         result.forEach((key, value) -> System.out.println(key + " : " + value));
     }
