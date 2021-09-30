@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 public class Main {
     static Scanner scan;
@@ -108,13 +110,22 @@ public class Main {
 
     private static HashMap<Character, Integer> sortMap(HashMap<Character, Integer> letters, boolean mostCommonFirst) {
 
-        HashMap<Character, Integer> result = new LinkedHashMap<>();
+        ArrayList<Entry<Character, Integer>> list = new ArrayList<>(letters.entrySet());
         if (mostCommonFirst) {
-            letters.entrySet().stream().sorted(HashMap.Entry.<Character, Integer>comparingByValue().reversed())
-                    .limit(10).forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
+            list.sort(Entry.<Character, Integer>comparingByValue().reversed());
         } else {
-            letters.entrySet().stream().sorted(HashMap.Entry.<Character, Integer>comparingByValue()).limit(10)
-                    .forEachOrdered(x -> result.put(x.getKey(), x.getValue()));
+            list.sort(Entry.<Character, Integer>comparingByValue());
+        }
+
+        HashMap<Character, Integer> result = new LinkedHashMap<>();
+
+        int limit = 10;
+        for (Entry<Character, Integer> entry : list) {
+            if (limit == 0) {
+                break;
+            }
+            result.put(entry.getKey(), entry.getValue());
+            --limit;
         }
 
         return result;
