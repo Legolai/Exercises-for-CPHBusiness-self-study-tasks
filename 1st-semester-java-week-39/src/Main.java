@@ -91,16 +91,16 @@ public class Main {
 
     private static Map<Character, Integer> getFrequentLetter() {
         Map<Character, Integer> letters = new HashMap<>();
-        char[] alphabet = "abcdefghijklmnopqrstuvwxyzæøå".toCharArray();
-        for (char c : alphabet) {
-            letters.put(c, 0);
-        }
+
         for (String s : text) {
             for (char c : s.toLowerCase().toCharArray()) {
-                if (!Character.isLetter(c)) {
-                    continue;
+                if (Character.isLetter(c)) {
+                    if (letters.containsKey(c)) {
+                        letters.put(c, letters.get(c) + 1);
+                    } else {
+                        letters.put(c, 1);
+                    }
                 }
-                letters.put(c, letters.get(c) + 1);
             }
         }
 
