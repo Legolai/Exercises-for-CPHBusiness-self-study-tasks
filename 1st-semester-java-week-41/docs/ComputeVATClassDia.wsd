@@ -1,0 +1,31 @@
+@startuml
+
+class ComputeVAT{
+	+ {static} void main(String[] args)
+}
+
+class Controller {
+	- Dialog UI
+	- View output
+	- CalculateVat vat
+	- String MSG
+	+ void run()
+}
+class Dialog {
+	+ double getUserInput()
+}
+class CalculateVat {
+	- String PRCVAT
+	+ double calc(double number)
+}
+class View {
+	- String CURRENCY
+	+ void print(double result, String typeOfResult)
+}
+
+ComputeVAT o-- Controller
+Controller::UI *-- Dialog
+Controller::output *-- View
+Controller::vat *-- CalculateVat
+
+@enduml
